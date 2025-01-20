@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3), 0px 5px 10px rgba(0, 0, 0, 0.2);
+            display: block;
+            align-items: center;
+            justify-content: center;
+            margin: 5% 30%;
+            padding: 20px;
+        }
+        .container h1{
+            text-align: center;
+        }
+        .container table{
+            width: 100%;
+        }
+        .container table td{
+            padding: 10px;
+        }
+        .container table input{
+            width: 90%;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            padding: 10px;
+        }
+        .container table button{
+            padding: 10px;
+            background-color: rgb(59, 59, 225);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <table>
+            <tr>
+                <td colspan="2"><input type="email" placeholder="Enter your mail"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="password" placeholder="password"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button value="signIn" style="width: 94%;">Sign In</button></td>
+            </tr>
+            <tr>
+                <td colspan="2">or don't have account <a href="Sign-Up.html">SignUp</a></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

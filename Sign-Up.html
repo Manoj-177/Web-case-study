@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        .container h1, 
+        .container p {
+            text-align: center;
+        }
+        .container1{
+            margin: 5% 30%;
+            text-align: center;
+        }
+        .container {
+            display: block;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3), 0px 5px 10px rgba(0, 0, 0, 0.2);
+            margin: 5% 30%;
+            padding: 20px;
+        }
+        .container table {
+            width: 100%;
+        }
+        .container table td{
+            padding-bottom: 10px;
+        }
+        .container input {
+            width: 90%;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            padding: 10px;
+        }
+        .container button {
+            width: 94%;
+            padding: 10px;
+            background-color: rgb(59, 59, 225);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <p>Sign up to continue</p>
+        
+            <table>
+                <tr>
+                    <td><label for="fname">Name</label></td>
+                    <td><input type="text" name="fname" id="fname" placeholder="Name"></td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email</label></td>
+                    <td><input type="email" name="email" id="email" placeholder="Email"></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password</label></td>
+                    <td><input type="password" name="password" id="password" placeholder="Password"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;"><button type="submit">Sign up</button></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="remember" id="remember">
+                    </td>
+                    <td>
+                        <label for="remember">Remember me</label>
+                    </td>
+                </tr>
+            </table>
+    </div>
+    <div class="container1">
+        <p>Already have an account? <a href="Sign-in.html">Sign in</a></p>
+    </div>
+</body>
+</html>
