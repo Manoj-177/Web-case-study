@@ -41,6 +41,19 @@
             color: white;
             border: none;
             cursor: pointer;
+            border-radius: 10px;
+        }
+        table button:hover {
+            transform: scale(1.05);
+        }
+        .signupm{
+            color: red;
+            text-align: center;
+            font-size: 14px;
+        }
+        .msg{
+            color: red;
+            text-align: center;
         }
     </style>
 </head>
@@ -48,35 +61,28 @@
     <div class="container">
         <h1>Sign Up</h1>
         <p>Sign up to continue</p>
-        
-            <table>
-                <tr>
-                    <td><label for="fname">Name</label></td>
-                    <td><input type="text" name="fname" id="fname" placeholder="Name"></td>
-                </tr>
-                <tr>
-                    <td><label for="email">Email</label></td>
-                    <td><input type="email" name="email" id="email" placeholder="Email"></td>
-                </tr>
-                <tr>
-                    <td><label for="password">Password</label></td>
-                    <td><input type="password" name="password" id="password" placeholder="Password"></td>
-                </tr>
-                <tr>
-                    <td colspan="2" style="text-align: center;"><button type="submit">Sign up</button></td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="checkbox" name="remember" id="remember">
-                    </td>
-                    <td>
-                        <label for="remember">Remember me</label>
-                    </td>
-                </tr>
-            </table>
-    </div>
-    <div class="container1">
+        <table>
+            <tr>
+                <td><label for="signup-name">Name</label></td>
+                <td><input type="text" id="signup-name" placeholder="Name"></td>
+            </tr>
+            <tr>
+                <td><label for="signup-email">Email</label></td>
+                <td><input type="email" id="signup-email" placeholder="Email"></td>
+            </tr>
+            <tr>
+                <td><label for="signup-password">Password</label></td>
+                <td><input type="password" id="signup-password" placeholder="Password"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <button type="submit" id="signup" onclick="signup()">Sign up</button>
+                </td>
+            </tr>
+        </table>
+        <div id="signupmsg" class="msg"></div>
         <p>Already have an account? <a href="Sign-in.html">Sign in</a></p>
     </div>
+    <script src="javaScript.js"></script>
 </body>
 </html>
