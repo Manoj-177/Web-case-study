@@ -35,6 +35,10 @@
             color: white;
             border: none;
             cursor: pointer;
+            border-radius: 10px;
+        }
+        table button:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -43,18 +47,20 @@
         <h1>Login</h1>
         <table>
             <tr>
-                <td colspan="2"><input type="email" placeholder="Enter your mail"></td>
+                <td colspan="2"><input id="signin-email" type="email" placeholder="Enter your email"></td>
             </tr>
             <tr>
-                <td colspan="2"><input type="password" placeholder="password"></td>
+                <td colspan="2"><input id="signin-password" type="password" placeholder="Password"></td>
             </tr>
             <tr>
-                <td colspan="2"><button value="signIn" style="width: 94%;">Sign In</button></td>
+                <td colspan="2"><button onclick="signin()">Sign In</button></td>
             </tr>
             <tr>
-                <td colspan="2">or don't have account <a href="Sign-Up.html">SignUp</a></td>
+                <td colspan="2">or don't have an account? <a href="Sign-Up.html">SignUp</a></td>
             </tr>
         </table>
+        <div id="signm"></div>
     </div>
+    <script src="javaScript.js"></script>    
 </body>
 </html>
