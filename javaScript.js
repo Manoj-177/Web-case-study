@@ -1,67 +1,18 @@
-function verification() {
-    var numRooms = document.getElementById("num1").value;
-    if (numRooms === "" || isNaN(numRooms) || numRooms <= 0) {
-        alert("Please enter a valid number of rooms.");
-        return false;
-    }
-    let form = document.getElementById("form");
-    form.style.display = "none";
-    let boxContainer = document.getElementById("boxContainer");
-    boxContainer.innerHTML = "";
-    for (let i = 1; i <= numRooms; i++) {
-        let box = document.createElement("div");
-        box.className = "box";
-        box.innerHTML = 
-           ` <h3>Room ${i}</h3>
-            <label>Name:</label> <input type="text" id="name${i}" placeholder="Enter name"><br>
-            <label>Phone:</label> <input type="tel" id="phone${i}" placeholder="Enter phone"><br>
-            <label>From:</label> <input type="date" id="time${i}"><br>
-            <label>To:</label> <input type="date" id="time${i}"><br>
-            <label>Paid:</label>
-            <select id="paid${i}">
-                <option value="Not Paid">Not Paid</option>
-                <option value="Paid">Paid</option>
-            </select><br>
-            <input type="submit"></input>`
-        ;
-        boxContainer.appendChild(box);
-    }
-}
-function displayRooms(numRooms) {
-    let boxContainer = document.getElementById("boxContainer");
-    boxContainer.innerHTML = "";  // Clear previous content
-
-    for (let i = 1; i <= numRooms; i++) {
-        let box = document.createElement("div");
-        box.className = "box";
-        box.innerHTML = 
-           `<h3>Room ${i}</h3>
-            <label>Name:</label> <input type="text" id="name${i}" placeholder="Enter name"><br>
-            <label>Phone:</label> <input type="tel" id="phone${i}" placeholder="Enter phone"><br>
-            <label>From:</label> <input type="date" id="from${i}"><br>
-            <label>To:</label> <input type="date" id="to${i}"><br>
-            <label>Paid:</label>
-            <select id="paid${i}">
-                <option value="Not Paid">Not Paid</option>
-                <option value="Paid">Paid</option>
-            </select><br>
-            <input type="submit"></input>`;
-        boxContainer.appendChild(box);
-    }
-}
 window.onload = function () {
-    if (localStorage.getItem("loggedInUser")) {
-        let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (loggedInUser) {
         document.getElementById("1bh").style.display = "block";
         document.getElementById("2bh").style.display = "block";
         document.getElementById("3bh").style.display = "block";
         document.getElementById("authContainer").style.display = "none";
         document.getElementById("logoutBtn").style.display = "block";
-        console.log("Logged in user:", loggedInUser);
+        document.getElementById("notificationBtn").style.display = "inline-block";
+
+        if (loggedInUser.numRooms) {
+            displayRooms(loggedInUser.numRooms);
+        }
     }
 };
-
-let users = JSON.parse(localStorage.getItem("users")) || [];  // Retrieve stored users
 
 function signup() {
     const name = document.getElementById("signup-name").value.trim();
@@ -73,42 +24,49 @@ function signup() {
         return;
     }
 
-    // Check if user already exists
+    let users = JSON.parse(localStorage.getItem("users")) || [];
     if (users.some(user => user.email === email)) {
         alert("Email already registered. Please sign in.");
         return;
     }
 
-    // Store new user
-    users.push({ name, email, password });
+    users.push({ name, email, password, numRooms: 0, roomData: {} });
     localStorage.setItem("users", JSON.stringify(users));
 
-    document.getElementById("signupmsg").textContent = "Sign up successful!";
-    alert("Sign-up successful. You can now log in.");
-    window.location.href = "Sign-in.html"; // Redirect to sign-in page
+    alert("Sign-up successful! Please sign in.");
+    window.location.href = "Sign-in.html";
 }
+
 function signin() {
     const email = document.getElementById("signin-email").value.trim();
     const password = document.getElementById("signin-password").value.trim();
 
     let storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-
     let user = storedUsers.find(user => user.email === email && user.password === password);
-
+    
     if (user) {
-        localStorage.setItem("loggedInUser", JSON.stringify(user));  // Store logged-in user session
-        localStorage.setItem("isLoggedIn", "true");  
+        localStorage.setItem("loggedInUser", JSON.stringify(user));
         alert("Login successful!");
-        window.location.href = "index.html";  // Redirect to home page
+        window.location.href = "index.html";
     } else {
         alert("Incorrect email or password.");
     }
 }
 
 function logout() {
-    localStorage.removeItem("isLoggedIn");    
-    localStorage.removeItem("loggedInUser");  // Remove only session data, not users
+    localStorage.removeItem("loggedInUser");
     alert("Logged out successfully.");
-    window.location.href = "index.html"; 
+    window.location.href = "index.html";
 }
+function checkRoomToDateNotifications(roomData) {
+    const today = new Date().toISOString().split('T')[0];
 
+    for (let roomId in roomData) {
+        if (roomData.hasOwnProperty(roomId)) {
+            let room = roomData[roomId];
+            if (room.to === today) {
+                addNotification(`Room ${roomId} is expiring today.`);
+            }
+        }
+    }
+}
