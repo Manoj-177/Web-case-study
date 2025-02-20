@@ -11,9 +11,11 @@
         .oneh {
             width: 100%;
             background: #333;
-            padding: 15px;
+            padding: 20px; /* Increased padding */
             text-align: center;
-            height: 10%;
+            height: auto; /* Adjust height to fit content */
+            display: flex;
+            align-items: center;
         }
         .oneh h2 a {
             color: white;
@@ -128,6 +130,15 @@
             border-color: #ffcc00;
             outline: none;
         }
+        input[type="submit"]{
+            padding: 5px;
+            border: 2px solid black;
+            border-radius: 4px;
+            background-color: #28a745;
+            width: 30%;
+            margin-left: 33%;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -136,14 +147,14 @@
     </div>
     <table id="form">
         <tr>
-            <td>Enter the number of rooms: </td>
+            <td>Enter the number of 1BHK rooms are there in your apartment: </td>
             <td><input type="number" id="num1"></td>
         </tr>
         <tr>
-            <td colspan="2"><button onclick="verification()">Submit</button></td>
+            <td colspan="2"><button onclick="verification1BHK()">Submit</button></td>
         </tr>
     </table>
     <div id="boxContainer" style="margin-top: 20px;"></div>
 </body>
-<script src="javaScript.js"></script>
+ <script src="1bhk.js"></script>
 </html>
