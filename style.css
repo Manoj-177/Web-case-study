@@ -154,3 +154,10 @@ body {
 #logoutBtn:active {
     background-color: #a30000;
 }
+#notificationBtn{
+    margin-right: 20px;
+    width: 4%;
+    padding: 8px;
+    background-color:  rgba(0, 0, 0, 0.7);
+    display: none;
+}
