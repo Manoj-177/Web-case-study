@@ -6,23 +6,29 @@
 </head>
 <body>
     <div class="container111" id="main">
-    <header class="Heading">
-        <nav class="navbar">
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#" style="color: red;">Home</a></li>
-                <li><a href="One.html" id="1bh" style="display: none;">1BHK</a></li>
-                <li><a href="One.html" id="2bh" style="display: none;">2BHK</a></li>
-                <li><a href="One.html" id="3bh" style="display: none;">3BHK</a></li>
-            </ul>
-            <div class="menu-toggle" id="menuToggle">&#9776;</div>
-        </nav>
-        <h1>Rentify</h1> 
-        <div class="signincontainer" id="authContainer">
-            <a href="Sign-Up.html"><img src="user-images.jpg" alt="Login"></a>
-            <h3><a href="Sign-Up.html">Sign In</a></h3>
-        </div>
-        <button id="logoutBtn" style="display: none;" onclick="logout()">Logout</button>
-    </header>
+        <header class="Heading">
+            <nav class="navbar">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#" style="color: red;">Home</a></li>
+                    <li><a href="One.html" id="1bh" style="display: none;">1BHK</a></li>
+                    <li><a href="Second.html" id="2bh" style="display: none;">2BHK</a></li>
+                    <li><a href="Third.html" id="3bh" style="display: none;">3BHK</a></li>
+                </ul>
+                <div class="menu-toggle" id="menuToggle">&#9776;</div>
+            </nav>
+            <h1>Rentify</h1> 
+            <div class="signincontainer" id="authContainer">
+                <a href="Sign-Up.html"><img src="user-images.jpg" alt="Login"></a>
+                <h3><a href="Sign-Up.html">Sign In</a></h3>
+            </div>
+            
+            <!-- Notification Button -->
+            <button id="notificationBtn" onclick="showNotifications()">🔔 <span id="notificationCount" style="color: red; font-weight: bold; font-size:larger">0</span>
+            </button>
+        
+            <button id="logoutBtn" style="display: none;" onclick="logout()">Logout</button>
+        </header>
+        
     <section class="about">
         <h1>About Us</h1>
         <p>Our platform helps hotel owners efficiently allocate rooms to customers upon their arrival, ensuring a seamless check-in process and reducing wait times.</p>
