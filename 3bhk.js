@@ -29,7 +29,7 @@ function displayRooms3BHK(numRooms) {
 
         let box = document.createElement("div");
         box.className = "box";
-        box.style.backgroundColor = roomData.submitted ? "red" : "white";
+        box.style.backgroundColor = roomData.paid === "Not Paid" ? "yellow" : roomData.submitted ? "red" : "white";
 
         box.innerHTML = `
             <h3>3BHK Room ${i}</h3>
@@ -41,7 +41,7 @@ function displayRooms3BHK(numRooms) {
             <label>To:</label> 
             <input type="date" id="to3${i}" value="${roomData.to || new Date().toISOString().split('T')[0]}" min="${new Date().toISOString().split('T')[0]}"><br>
             <label>Paid:</label>
-            <select id="paid3${i}">
+            <select id="paid3${i}" onchange="updatePaymentStatus3BHK(${i})">
                 <option value="Not Paid" ${roomData.paid === "Not Paid" ? "selected" : ""}>Not Paid</option>
                 <option value="Paid" ${roomData.paid === "Paid" ? "selected" : ""}>Paid</option>
             </select><br>
@@ -71,8 +71,13 @@ function submitRoom3BHK(roomNum) {
     localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
 
     updateUserData(loggedInUser);
+    updatePaymentStatus3BHK(roomNum);
+}
 
-    document.querySelector(`.box:nth-child(${roomNum})`).style.backgroundColor = "red";
+function updatePaymentStatus3BHK(roomNum) {
+    let paid = document.getElementById(`paid3${roomNum}`).value;
+    let box = document.querySelector(`.box:nth-child(${roomNum})`);
+    box.style.backgroundColor = paid === "Not Paid" ? "yellow" : "red";
 }
 
 // Update user data in localStorage
