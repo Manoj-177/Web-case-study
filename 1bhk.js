@@ -1,4 +1,3 @@
-// Function to verify and display rooms
 function verification1BHK() {
     var numRooms = document.getElementById("num1").value;
     if (numRooms === "" || isNaN(numRooms) || numRooms <= 0) {
@@ -30,6 +29,9 @@ function displayRooms1BHK(numRooms) {
         let box = document.createElement("div");
         box.className = "box";
         box.style.backgroundColor = roomData.submitted ? "red" : "white";
+        if (roomData.paid === "Not Paid") {
+            box.style.backgroundColor = "yellow";
+        }
 
         box.innerHTML = `
             <h3>1BHK Room ${i}</h3>
@@ -40,7 +42,7 @@ function displayRooms1BHK(numRooms) {
             <label>To:</label> 
             <input type="date" id="to1${i}" value="${roomData.to || new Date().toISOString().split('T')[0]}" min="${new Date().toISOString().split('T')[0]}"><br>
             <label>Paid:</label>
-            <select id="paid1${i}">
+            <select id="paid1${i}" onchange="changeBackground(${i})">
                 <option value="Not Paid" ${roomData.paid === "Not Paid" ? "selected" : ""}>Not Paid</option>
                 <option value="Paid" ${roomData.paid === "Paid" ? "selected" : ""}>Paid</option>
             </select><br>
@@ -50,6 +52,12 @@ function displayRooms1BHK(numRooms) {
     }
 }
 
+// Function to change background color based on payment status
+function changeBackground(roomNum) {
+    let paidStatus = document.getElementById(`paid1${roomNum}`).value;
+    let box = document.querySelector(`.box:nth-child(${roomNum})`);
+    box.style.backgroundColor = paidStatus === "Not Paid" ? "yellow" : "white";
+}
 
 // Function to handle room submission
 function submitRoom1BHK(roomNum) {
@@ -73,7 +81,8 @@ function submitRoom1BHK(roomNum) {
 
     updateUserData(loggedInUser);
 
-    document.querySelector(`.box:nth-child(${roomNum})`).style.backgroundColor = "red";
+    let box = document.querySelector(`.box:nth-child(${roomNum})`);
+    box.style.backgroundColor = paid === "Not Paid" ? "yellow" : "red";
 }
 
 // Function to update user data in localStorage
