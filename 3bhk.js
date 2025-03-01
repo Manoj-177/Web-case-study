@@ -1,5 +1,3 @@
-// 3BHK JavaScript
-
 function verification3BHK() {
     var numRooms = document.getElementById("num3").value;
     if (numRooms === "" || isNaN(numRooms) || numRooms <= 0) {
@@ -11,7 +9,6 @@ function verification3BHK() {
     if (loggedInUser) {
         loggedInUser.numRooms3BHK = numRooms;
         localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
-
         updateUserData(loggedInUser);
     }
 
@@ -23,7 +20,9 @@ function displayRooms3BHK(numRooms) {
     boxContainer.innerHTML = "";
 
     let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-    let savedData = loggedInUser?.roomData3BHK || {};
+    if (!loggedInUser) return;
+
+    let savedData = loggedInUser.roomData3BHK || {};
 
     for (let i = 1; i <= numRooms; i++) {
         let roomData = savedData[i] || {};
@@ -37,10 +36,10 @@ function displayRooms3BHK(numRooms) {
             <label>Name:</label> <input type="text" id="name3${i}" value="${roomData.name || ""}" placeholder="Enter name"><br>
             <label>Phone:</label> <input type="tel" id="phone3${i}" value="${roomData.phone || ""}" placeholder="Enter phone"><br>
             <label>From:</label> 
-            <input type="date" id="from1${i}" value="${roomData.from || new Date().toISOString().split('T')[0]}" min="${new Date().toISOString().split('T')[0]}"><br>
+            <input type="date" id="from3${i}" value="${roomData.from || new Date().toISOString().split('T')[0]}" min="${new Date().toISOString().split('T')[0]}"><br>
 
             <label>To:</label> 
-            <input type="date" id="to1${i}" value="${roomData.to || new Date().toISOString().split('T')[0]}" min="${new Date().toISOString().split('T')[0]}"><br>
+            <input type="date" id="to3${i}" value="${roomData.to || new Date().toISOString().split('T')[0]}" min="${new Date().toISOString().split('T')[0]}"><br>
             <label>Paid:</label>
             <select id="paid3${i}">
                 <option value="Not Paid" ${roomData.paid === "Not Paid" ? "selected" : ""}>Not Paid</option>
@@ -76,6 +75,18 @@ function submitRoom3BHK(roomNum) {
     document.querySelector(`.box:nth-child(${roomNum})`).style.backgroundColor = "red";
 }
 
+// Update user data in localStorage
+function updateUserData(updatedUser) {
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    let userIndex = users.findIndex(user => user.email === updatedUser.email);
+
+    if (userIndex !== -1) {
+        users[userIndex] = updatedUser;
+        localStorage.setItem("users", JSON.stringify(users));
+    }
+}
+
+// Load data on page load
 window.onload = function () {
     let loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
     if (loggedInUser && loggedInUser.numRooms3BHK) {
