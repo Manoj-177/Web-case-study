@@ -30,6 +30,9 @@ function displayRooms2BHK(numRooms) {
         let box = document.createElement("div");
         box.className = "box";
         box.style.backgroundColor = roomData.submitted ? "red" : "white";
+        if (roomData.paid === "Not Paid") {
+            box.style.backgroundColor = "yellow";
+        }
 
         box.innerHTML = `
             <h3>2BHK Room ${i}</h3>
@@ -38,7 +41,7 @@ function displayRooms2BHK(numRooms) {
             <label>From:</label> <input type="date" id="from2${i}" value="${roomData.from || new Date().toISOString().split('T')[0]}" min="${new Date().toISOString().split('T')[0]}"><br>
             <label>To:</label> <input type="date" id="to2${i}" value="${roomData.to || new Date().toISOString().split('T')[0]}" min="${new Date().toISOString().split('T')[0]}"><br>
             <label>Paid:</label>
-            <select id="paid2${i}">
+            <select id="paid2${i}" onchange="changeBackground2BHK(${i})">
                 <option value="Not Paid" ${roomData.paid === "Not Paid" ? "selected" : ""}>Not Paid</option>
                 <option value="Paid" ${roomData.paid === "Paid" ? "selected" : ""}>Paid</option>
             </select><br>
@@ -46,6 +49,13 @@ function displayRooms2BHK(numRooms) {
         `;
         boxContainer.appendChild(box);
     }
+}
+
+// Function to change background color based on payment status
+function changeBackground2BHK(roomNum) {
+    let paidStatus = document.getElementById(`paid2${roomNum}`).value;
+    let box = document.querySelector(`.box:nth-child(${roomNum})`);
+    box.style.backgroundColor = paidStatus === "Not Paid" ? "yellow" : "white";
 }
 
 // Function to handle 2BHK room submission
@@ -70,7 +80,8 @@ function submitRoom2BHK(roomNum) {
 
     updateUserData(loggedInUser);
 
-    document.querySelector(`.box:nth-child(${roomNum})`).style.backgroundColor = "red";
+    let box = document.querySelector(`.box:nth-child(${roomNum})`);
+    box.style.backgroundColor = paid === "Not Paid" ? "yellow" : "red";
 }
 
 // Function to update user data across sessions
